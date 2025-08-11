@@ -9,6 +9,7 @@ group = 'de.lachcrafter'
 
 version = property 'version'
 velocity_version = property 'velocity_version'
+boolean in_development = property 'in_development'
 
 repositories {
     mavenCentral()
@@ -28,7 +29,7 @@ tasks {
         // Configure the Velocity version for our task.
         // This is the only required configuration besides applying the plugin.
         // Your plugin's jar (or shadowJar if present) will be used automatically.
-        velocityVersion(velocity_version)
+        velocityVersion(velocity_version as String)
     }
 }
 
@@ -45,7 +46,7 @@ tasks.withType(JavaCompile).configureEach {
 def templateSource = file('src/main/templates')
 def templateDest = layout.buildDirectory.dir('generated/sources/templates')
 def generateTemplates = tasks.register('generateTemplates', Copy) { task ->
-    def props = ['version': project.version]
+    def props = ['version': project.version, "in_development": in_development]
     task.inputs.properties props
 
     task.from templateSource

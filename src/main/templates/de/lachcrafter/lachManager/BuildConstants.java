@@ -4,4 +4,6 @@ package de.lachcrafter.lachManager;
 public class BuildConstants {
 
     public static final String VERSION = "${version}";
+
+    public static final boolean IN_DEVELOPMENT = "${in_development}"
 }
